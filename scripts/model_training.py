@@ -13,7 +13,9 @@ def train():
     """
     filename = path.join(path.dirname(__file__), "../data/hydrogen_prices.csv")
     df = load_and_clean_data(filename)
-    X, y, scaler = normalize_features(df=df, drop_features=["date"])
+    X, y, scaler = normalize_features(
+        df=df, drop_features=["date", "average_temperature"]
+    )
 
     # Split the data into training and testing sets
 

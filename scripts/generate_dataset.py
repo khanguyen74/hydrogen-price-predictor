@@ -12,6 +12,10 @@ def generate_synthetic_data(rows=500):
     gov_policy_score = np.round(gov_policy_score, 4)  # round to 4 decimal places
     demand_index = np.random.normal(loc=1.0, scale=0.2, size=rows)  # normalized demand
     demand_index = np.round(demand_index, 4)  # round to 4 decimal places
+
+    # Add an unrelated feature
+    average_temperature = np.random.normal(loc=70, scale=5, size=rows)
+    average_temperature = np.round(average_temperature, 2)
     noise = np.random.normal(0, 2, size=rows)
 
     # Simulate hydrogen price based on features
@@ -26,6 +30,7 @@ def generate_synthetic_data(rows=500):
             "energy_cost": energy_cost,
             "gov_policy_score": gov_policy_score,
             "demand_index": demand_index,
+            "average_temperature": average_temperature,
             "hydrogen_price": hydrogen_price,
         }
     )
