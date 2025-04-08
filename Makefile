@@ -1,9 +1,10 @@
 VENV = .venv
-PYTHON = $(VENV)/bin/python
-FASTAPI = $(VENV)/bin/fastapi
-PIP = $(VENV)/bin/pip
+BIN = $(VENV)/bin
+PYTHON = $(BIN)/python
+FASTAPI = $(BIN)/fastapi
+PIP = $(BIN)/pip
 
-.PHONY: all setup_env install generate train api clean
+.PHONY: all setup_env install generate train api notebook clean
 setup_env:
 	python3 -m venv .venv
 	.venv/bin/pip install -r requirements.txt
@@ -22,6 +23,9 @@ train:
 
 api:
 	$(FASTAPI) run
+
+notebook: # Run the Jupyter notebook
+	$(PYTHON) -m jupyter notebook 
 
 clean:
 	# Clean up the environment
