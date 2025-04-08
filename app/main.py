@@ -1,6 +1,4 @@
 from os import path
-from typing import Union
-import numpy as np
 import pandas as pd
 import pickle
 

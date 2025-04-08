@@ -16,6 +16,8 @@ Pickle-based model and scaler serialization
 
 ```plaintext
 hydrogen-price-predictor/
+├── app/
+│   └── main.py
 ├── data/
 │   └── hydrogen_prices.csv
 ├── models/
@@ -23,11 +25,13 @@ hydrogen-price-predictor/
 │   └── scaler.pkl
 ├── notebooks/
 │   └── hydrogren_prices_analysis.ipynb
-├── app/
-│   └── main.py
-├── requirements.txt
+├── scripts/
+│   ├── genearate_dataset.py
+│   ├── model_training.py
+│   └── preprocessing.py
 ├── Makefile
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ## Dataset
