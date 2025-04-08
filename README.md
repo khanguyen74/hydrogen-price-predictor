@@ -18,7 +18,7 @@ Pickle-based model and scaler serialization
 hydrogen-price-predictor/
 ├── data/
 │   └── hydrogen_prices.csv
-├── model/
+├── models/
 │   ├── model.pkl
 │   └── scaler.pkl
 ├── notebooks/
@@ -26,6 +26,7 @@ hydrogen-price-predictor/
 ├── app/
 │   └── main.py
 ├── requirements.txt
+├── Makefile
 └── README.md
 ```
 
@@ -57,11 +58,13 @@ pip install -r requirements.txt
 
 Make sure you have installed the required packages and have the model and scaler files in the `models/` directory.
 
-### Run the FastAPI server
+### Run the FastAPI server manually
 
 ```bash
 fastapi run app/main.py
 ```
+
+The server will be running on port 8000 by default
 
 ### Sample request
 
@@ -77,11 +80,46 @@ Payload:
 }
 ```
 
+```bash
+curl -X POST localhost:8000/predict -H "Content-Type: application/json" \
+-d '{
+    "energy_cost": 50.0,
+    "gov_policy_score": 10.0,
+    "demand_index": 2.25
+}'
+
+```
+
 Response:
 
 ```json
 {
   "prediction": 41.6522452965522
+}
+```
+
+Endpoint: POST /predict_batch
+
+```json
+[
+  {
+    "energy_cost": 100.0,
+    "gov_policy_score": 5.0,
+    "demand_index": 1.25
+  },
+  {
+    "energy_cost": 84.35,
+    "gov_policy_score": 9.0,
+    "demand_index": 2.25
+  }
+]
+```
+
+Response:
+
+```json
+{
+  "predictions": [72.6568118223029, 75.43057271065331]
 }
 ```
 
