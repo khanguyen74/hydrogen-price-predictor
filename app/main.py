@@ -10,18 +10,16 @@ app = FastAPI()
 
 class Features(BaseModel):
     energy_cost: float
-    gov_policy_score: float
+    gov_policy_score: int
     demand_index: float
 
 
-def load_models():
-    """Load the model and scaler from the specified path."""
-    model_path = path.join(path.dirname(__file__), "../models")
-    with open(path.join(model_path, "model.pkl"), "rb") as f:
-        model = pickle.load(f)
-    with open(path.join(model_path, "scaler.pkl"), "rb") as f:
-        scaler = pickle.load(f)
-    return model, scaler
+# load scaler and model
+model_path = path.join(path.dirname(__file__), "../models")
+with open(path.join(model_path, "model.pkl"), "rb") as f:
+    model = pickle.load(f)
+with open(path.join(model_path, "scaler.pkl"), "rb") as f:
+    scaler = pickle.load(f)
 
 
 @app.get("/health")
@@ -41,7 +39,6 @@ def predict(features: Features):
             }
         ]
     )
-    model, scaler = load_models()
     data_scaled = scaler.transform(input_df)
     prediction = model.predict(data_scaled)
     return {"prediction": prediction[0]}
@@ -60,7 +57,6 @@ def predict_batch(features: list[Features]):
             for feature in features
         ]
     )
-    model, scaler = load_models()
     data_scaled = scaler.transform(input_df)
     prediction = model.predict(data_scaled)
     return {"predictions": prediction.tolist()}

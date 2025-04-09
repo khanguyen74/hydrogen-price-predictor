@@ -79,7 +79,7 @@ Payload:
 ```json
 {
   "energy_cost": 50.0,
-  "gov_policy_score": 10.0,
+  "gov_policy_score": 10,
   "demand_index": 1.25
 }
 ```
@@ -88,7 +88,7 @@ Payload:
 curl -X POST localhost:8000/predict -H "Content-Type: application/json" \
 -d '{
     "energy_cost": 50.0,
-    "gov_policy_score": 10.0,
+    "gov_policy_score": 10,
     "demand_index": 2.25
 }'
 
@@ -108,12 +108,12 @@ Endpoint: POST /predict_batch
 [
   {
     "energy_cost": 100.0,
-    "gov_policy_score": 5.0,
+    "gov_policy_score": 5,
     "demand_index": 1.25
   },
   {
     "energy_cost": 84.35,
-    "gov_policy_score": 9.0,
+    "gov_policy_score": 9,
     "demand_index": 2.25
   }
 ]
@@ -205,6 +205,8 @@ Trains the regression model and saves the serialized model (model.pkl) and scale
 make api
 ```
 
+---
+
 Starts the FastAPI server to serve predictions. By default, it runs at <http://127.0.0.1:8000>.
 
 6. Launch Jupyter Notebook
@@ -212,6 +214,8 @@ Starts the FastAPI server to serve predictions. By default, it runs at <http://1
 ```bash
 make notebook
 ```
+
+---
 
 Opens a local Jupyter Notebook server to explore the EDA or train/test results interactively.
 
