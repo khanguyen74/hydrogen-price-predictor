@@ -1,4 +1,4 @@
-# Hydrogen Price Prediction - Junior AI Engineer Take-Home Project
+# Hydrogen Price Predictor - Junior AI Engineer Take-Home Project
 
 This project tackles a regression task to predict future hydrogen market prices using historical data and related features such as energy costs, government policy scores, and demand fluctuations.
 
@@ -9,8 +9,6 @@ Data preprocessing and exploratory data analysis (EDA) (Jupyter Notebook)
 Model training and evaluation (Linear Regression, Random Forest, Decision Tree) (Jupyter Notebook)
 
 A FastAPI-based API to serve predictions
-
-Pickle-based model and scaler serialization
 
 ## Project Structure
 
@@ -49,6 +47,8 @@ A Python script was used to create 500 weekly records starting from January 2016
 - `demand_index`: A normalized index representing market demand, centered around 1.0, with random fluctuations to simulate real-world demand variability.
 
 - `hydrogen_price`: The target variable, computed as a linear combination of the above features plus some noise to simulate realistic randomness.
+
+- `average_temperature`: An additional feature included to simulate unrelated environmental data. It has minimal correlation with hydrogen price and can be useful for demonstrating the impact of irrelevant variables during EDA and feature selection.
 
 ## Installation
 
@@ -129,7 +129,7 @@ Response:
 
 ## Train the Model
 
-The model can be trained using this command:
+The model can be re-trained using this command:
 
 ```bash
 python scripts/model_training.py
@@ -141,51 +141,84 @@ After train successfully, the model and scaler will be saved in the `model/` dir
 
 This project includes a Makefile for easy execution of common tasks. You can use the following commands:
 
-### Setup Environment
+### Requirements
+
+To use the Makefile, ensure the following are installed on your system:
+
+- Python 3.8+
+
+- Make (available by default on macOS/Linux; for Windows, use Git Bash or WSL)
+
+- pip (comes with Python)
+
+### Commands
+
+1. Setup Virtual Environment
+
+Creates a new virtual environment in .venv and installs all dependencies from requirements.txt.
 
 ```bash
 make setup_env
 ```
 
-Creates a virtual environment in .venv and installs dependencies listed in requirements.txt.
+> After setup, activate the virtual environment using:
+>
+> ```bash
+> source .venv/bin/activate
+> ```
 
-> Note: Run this once when setting up the project for the first time.
+---
 
-### Reinstall Dependencies
+2. Install Dependencies (Optional)
 
 ```bash
 make install
 ```
 
-Installs project dependencies into an already-created virtual environment.
+Reinstalls all dependencies if you’ve already set up the environment.
 
-### Generate Dataset
+---
+
+3. Generate Dataset
 
 ```bash
 make generate
 ```
 
-### Train model
+Runs the dataset generation script to produce the synthetic hydrogen price dataset.
+
+---
+
+4. Train the Model
 
 ```bash
 make train
-
 ```
 
-### Run FastAPI server
+Trains the regression model and saves the serialized model (model.pkl) and scaler (scaler.pkl) to the model/ directory.
+
+---
+
+5. Run the FastAPI server
 
 ```bash
 make api
 ```
 
-### Start Jupyter Notebook
+Starts the FastAPI server to serve predictions. By default, it runs at <http://127.0.0.1:8000>.
+
+6. Launch Jupyter Notebook
 
 ```bash
 make notebook
 ```
 
-### Clean Up
+Opens a local Jupyter Notebook server to explore the EDA or train/test results interactively.
+
+7. Clean Up the Project Files
 
 ```bash
 make clean
 ```
+
+Removes the virtual environment and temporary build/cache files.
