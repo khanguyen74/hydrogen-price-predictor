@@ -68,7 +68,7 @@ Make sure you have installed the required packages and have the model and scaler
 fastapi run app/main.py
 ```
 
-The server will be running on port 8000 by default
+The server runs on port 8000 by default: <http://127.0.0.1:8000>
 
 ### Sample request
 
